@@ -1,0 +1,123 @@
+h1, h2, h3, h5, h6 {
+    font-family: 'Audiowide';
+}
+body{
+background:#F0F0F0;
+}
+
+
+.iheartlogo{
+color: #c33;
+font-size: 1.5em;
+line-height: 1.5em;
+}
+.shb-pannel{
+width:95%;
+margin:auto;
+}
+.shb-desc{
+font-style:italic;
+font-size:0.75em;
+}
+.shb-faq-q{
+font-weight:bold;
+
+}
+.shb-faq-a{
+font-style:italic;
+font-size:0.75em;
+}
+.shb-quote blockquote{
+  display:block;
+  position: relative;
+  color: #6B6B6B;
+  /*Font*/
+  font-size: 1em;
+  font-style:italic;
+  font-weight: normal;
+}
+
+/* .shb-quote blockquote::before{
+content: "\201C"; 
+ 
+font-family: "Georgia, serif";
+font-size: 2.6em;
+font-weight: bold; 
+position: absolute;
+left: 0.1em;
+top: -0.5em;
+}
+
+.shb-quote blockquote::after{
+
+content: "\201D";
+font-family: "Georgia, serif";
+font-size: 2.6em;
+font-weight: bold;
+position: absolute;
+right: 0.1em;
+bottom: -1em;
+} */
+.shb-quote .shb-quote-author{
+float:right;
+font-style:italic;
+font-size:0.75em;
+
+}
+
+#faq-button{
+position:absolute;
+top: 0.3em;
+left: 0.3em;
+
+}
+#game_container{
+visibility:hidden;
+ min-height:30em;
+}
+#shb-start-countdown{
+font-family: "Audiowide";
+color:#428bca;
+font-size:9em;
+min-height:10em;
+}
+#game_timer{
+font-family: "Audiowide";
+font-size:2em;
+
+}
+#game_minutes{
+font-family: "Audiowide";
+}
+#game_seconds{
+font-family: "Audiowide";
+width: 4em;
+}
+
+#main_new_game{
+margin-bottom:3em;
+}
+/* #kareoke::first-letter{
+color:green;
+} */
+#kareoke{
+font-size: 1.5em;
+font-weight:bold;
+float:left;
+text-align:left;
+}
+#flying_stuff{
+overflow: hidden;
+width: 2em;
+height: 5em;
+position: absolute;
+display: inline-block;
+}
+.flying_stuff{
+/* display:none; */
+/* float:right; */
+color:green;
+font-size:0.5em;
+position:absolute;
+bottom:0px;
+}
