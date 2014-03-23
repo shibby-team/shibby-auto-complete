@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        id          = "il.co.shibby.auto-complete"
+        versionCode = "1" 
+        version     = "0.1.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Auto-Complete</name>
+
+    <description>
+        An auto-complete game for mobile by shibby-team.
+    </description>
+
+    <author href="http://shibby.co.il" email="support@shibby.co.il">
+        Shibby 
+    </author>
+
+</widget>
