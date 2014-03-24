@@ -15,5 +15,4 @@
     <author href="http://shibby.co.il" email="support@shibby.co.il">
         Shibby 
     </author>
-	<gap:plugin name="org.apache.cordova.vibration" />
 </widget>
