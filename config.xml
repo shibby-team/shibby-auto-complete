@@ -16,10 +16,6 @@
         Shibby 
     </author>
 	<!-- Plugins -->  
-	<gap:plugin name="org.apache.cordova.device" /> <!-- Device plugin -->  
-	<gap:plugin name="com.phonegap.plugin.statusbar" /> <!-- Status bar plugin -->  
-	<gap:plugin name="com.verso.cordova.clipboard" /> <!-- Clipboard plugin -->  
-	<gap:plugin name="com.chariotsolutions.cordova.plugin.keyboard_toolbar_remover" /> <!-- Keyboard toolbar removal plugin -->  
-	<gap:plugin name="org.apache.cordova.splashscreen" /> <!-- Splashscreen plugin -->  
+	<gap:plugin name="org.apache.cordova.device" /> <!-- Device plugin -->
 	<gap:plugin name="org.apache.cordova.vibration" /> <!-- Vibration plugin -->
 </widget>
