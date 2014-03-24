@@ -23,7 +23,8 @@ $(document).ready(function(){
 
 	var lastWord  			= "", 			// Used for auto correct detection
 		startTimer			= 1, 			// Game start countdown
-		score				= 0,			// Holds the final score		
+		score				= 0,			// Holds the final score	
+		highScore			= localStorage.getItem("shb_ac_hs"),
 		gameInProgress  	= false,
 		completedQuotes		= new Array(), 	// Holds all the completed quotes to show @ gameover screen
 		kareokeGap			= 30, 			// How much letters will the kareoke show
@@ -33,7 +34,7 @@ $(document).ready(function(){
 		charsTyped			= 0,			// How many chars he typed overall **** NOT USED ****
 		charBonus			= 500,
 		sentenceBonus		= 5000,		
-		autoCorrectBonus	= 1000,
+		autoCorrectBonus	= 2000,
 		charPenalty			= 200,		
 		autoCorrectPenalty	= 2000,
 		pastePenalty		= 5000,
@@ -49,6 +50,14 @@ $(document).ready(function(){
 		
 	
 	console.log(quoteDatabase);
+	
+	
+	//reload high score
+	if (highScore !== null) {
+		$('#high_score').html(highScore);
+	}
+	
+	
 
 	
 	//@TODO: this code should be used for "Settings", if they'll exist, since this switches between buttons.	
@@ -65,16 +74,40 @@ $(document).ready(function(){
 		
 	$('#game_input').on('paste',function(){
 	
-		//autoCorrectDetected();
-	
 		$('#game_input').val('');
 		gameTime -= pastePenalty;
 		score -= pastePenalty;
 		notify("<span style='color:red;'>-"+miliToString(pastePenalty)+"</span>");
+		
 	});	
 	
 	
+	$(window).on("blur",function(){
+		
+		pause();
+		
 	
+	});
+	
+	function pause(){
+
+		if(gameInProgress){
+		
+			clearInterval(gameTimer);
+			$('#game_pause').modal("show");
+			$('#game_pause').on("click",function(){ unpause(); });
+		
+		}
+	
+	}
+
+	function unpause(){
+		
+		$('#game_pause').off("click");
+		$('#game_pause').modal("hide");
+		gameTimer = setInterval(setTime, 100);
+	
+	}
 	
     function setTime(){
 	
@@ -182,15 +215,31 @@ $(document).ready(function(){
 		
 		clearInterval(gameTimer);
 		gameScore = calcScore();
-		$('#game_end .score').html("Your score is:"+gameScore);
+
+		
+		if (highScore === null) {
+			highScore = gameScore;
+			("<span id='new_high_score'>New high score!</span>").insertAfter('.score');
+		}
+		
+		
+		if(gameScore > highScore){
+			$("<span id='new_high_score'>New high score!</span>").insertAfter('.score');
+			highScore = gameScore;
+		}
+		localStorage.setItem("shb_ac_hs",highScore);
+		$('#high_score').html(highScore);		
+		$('#game_end .score').html(gameScore);
 		var html = "";
 		$.each(completedQuotes,function(index,item){
 			
-			html += "<li>\""+item.quote+"\" -- "+item.quote_by+"</li>";
+			html += "<li class='shb-quote'><blockquote>"+item.quote+"</blockquote><span class='shb-quote-author'> "+item.quote_by+"</span></li>";
 		
 		});
-		console.log("HTML: "+html);
+		//console.log("HTML: "+html);
 		$('#game_end .quotes-list').html(html);
+		
+		
 		$('#game_end').modal("show");
 		endGame();
 	
@@ -198,7 +247,7 @@ $(document).ready(function(){
 	
 	function calcScore(){
 	
-		return Math.round(score / 1000);
+		return Math.round(score / 100);
 	
 	}
 	
@@ -340,6 +389,8 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',false);		
 		initKareoke(quote);
 		gameTimer = setInterval(setTime, 100);
+		$('#quotes-list-container').hide();
+		$('#new_high_score').remove();
 	}
 	
 	
@@ -412,7 +463,9 @@ $(document).ready(function(){
 	
 	function sentenceCompleted(){
 		console.log("Sentence Complete | Input : "+$('#game_input').val() +" Expected : "+kareoke.join(''));
-		if($('#game_input').val().localeCompare(kareoke.join('')) == 0){
+		//Since this event occours before the key is pressed, let's give him a pass and ignore the last letter.
+		if($('#game_input').val().localeCompare(kareoke.join('').substr(0,kareoke.length-1)) == 0){
+	
 			console.log("Sentence is cool");
 			gameTime += sentenceBonus;
 			score += sentenceBonus;
@@ -453,6 +506,11 @@ $(document).ready(function(){
 	}
 	
 	
+	$('#display_quotes').click(function(){
+	
+		$('#quotes-list-container').fadeIn();
+		
+	});
 	
 	
 	
@@ -464,6 +522,7 @@ $(document).ready(function(){
 <a href="#faq_modal" data-toggle="modal" role="button" id="faq-button">
 <i class="fa fa-question fa-2x"></i> 
 </a>	
+<span id="high-score-container">High Score: <span id="high_score">0</span></span>
 <div class="container-fluid">
 	<div class="row">
 		<div class="text-center shb-pannel">
@@ -483,8 +542,7 @@ $(document).ready(function(){
 			<div id="shb-start-countdown"></div>
 			<div id="game_container">
 				<div id="string_to_match" class="shb-quote" style="visibility:hidden;">
-				<blockquote></blockquote>
-				<span class="shb-quote-author"></span>
+				
 				</div>
 				<div>
 					<div id="kareoke"></div>
@@ -502,7 +560,7 @@ $(document).ready(function(){
 <div class="modal fade" role="dialog" id="faq_modal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background:#428bca;color:white;">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">FAQ</h4>
       </div>
@@ -537,22 +595,35 @@ $(document).ready(function(){
 <div class="modal fade" role="dialog" id="game_end">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background:#428bca;color:white;">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Game over</h4>
       </div>
       <div class="modal-body">
+	  <p class="score-label">Your score is:</p>
       <div class="score"></div>
 	  <br><br>
-	  <div>
+	  <div id="quotes-list-container" style="display:none;">
 		You have been given the following quotes:
 		<ul class="quotes-list"></ul>
 	  </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="text-align:center;">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 		<button type="button" class="btn btn-success new_game" >New Game</button>
+		<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
       </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" role="dialog" id="game_pause">
+  <div class="modal-dialog">
+    <div class="modal-content" id="game_pause_modal">
+      <i class="fa fa-pause fa-5x"></i>
+	  <p style="text-align:center;">Paused</p>
+	  <p style="text-align:center;">Click anywhere to unpause</p>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

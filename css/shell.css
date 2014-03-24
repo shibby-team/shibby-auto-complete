@@ -35,13 +35,14 @@ font-size:0.75em;
   font-size: 1em;
   font-style:italic;
   font-weight: normal;
+  border: none;
 }
 
-/* .shb-quote blockquote::before{
+.shb-quote blockquote::before{
 content: "\201C"; 
  
 font-family: "Georgia, serif";
-font-size: 2.6em;
+font-size: 1.0em;
 font-weight: bold; 
 position: absolute;
 left: 0.1em;
@@ -52,17 +53,21 @@ top: -0.5em;
 
 content: "\201D";
 font-family: "Georgia, serif";
-font-size: 2.6em;
+font-size: 1.0em;
 font-weight: bold;
 position: absolute;
 right: 0.1em;
 bottom: -1em;
-} */
+}
 .shb-quote .shb-quote-author{
 float:right;
 font-style:italic;
 font-size:0.75em;
+font-weight:bold;
 
+}
+.quotes-list{
+list-style:none;
 }
 
 #faq-button{
@@ -70,6 +75,24 @@ position:absolute;
 top: 0.3em;
 left: 0.3em;
 
+}
+#high-score-container{
+position:absolute;
+top: 0.3em;
+right: 0.3em;
+
+}
+#high_score{
+/* font-family: 'Audiowide'; */
+color:#428bca;
+font-weight:bold;
+}
+#new_high_score{
+font-weight:bold;
+font-style:italic;
+color:#47a447;
+text-align: center;
+display: block;
 }
 #game_container{
 visibility:hidden;
@@ -120,4 +143,28 @@ color:green;
 font-size:0.5em;
 position:absolute;
 bottom:0px;
+}
+.score{
+font-family: "Audiowide";
+font-size:3em;
+color:#428bca;
+margin:auto;
+text-align:center;
+}
+.score-label{
+margin:auto;
+text-align:center;
+font-style:italic;
+}
+#game_pause_modal{
+background:none;
+box-shadow:none;
+-webkit-box-shadow:none;
+-moz-box-shadow:none;
+border:none;
+color:white;
+font-weight:bold;
+height:100%;
+text-align: center;
+
 }
