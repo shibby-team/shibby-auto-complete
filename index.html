@@ -535,56 +535,16 @@ $(document).ready(function(){
 	
 	}
 	
-	$('#share_score').click(function(){
+	$('#fb_share_score').click(function(){
 		
-			FB.Event.subscribe('auth.authResponseChange', function(response) {
-			// Here we specify what we do with the response anytime this event occurs. 
-			if (response.status === 'connected') {
-			  // The response object is returned with a status field that lets the app know the current
-			  // login status of the person. In this case, we're handling the situation where they 
-			  // have logged in to the app.
-			  shareScore();
-			} else if (response.status === 'not_authorized') {
-			  // In this case, the person is logged into Facebook, but not into the app, so we call
-			  // FB.login() to prompt them to do so. 
-			  // In real-life usage, you wouldn't want to immediately prompt someone to login 
-			  // like this, for two reasons:
-			  // (1) JavaScript created popup windows are blocked by most browsers unless they 
-			  // result from direct interaction from people using the app (such as a mouse click)
-			  // (2) it is a bad experience to be continually prompted to login upon page load.
-			  FB.login(function(){}, {scope: 'publish_actions'});
-			} else {
-			  // In this case, the person is not logged into Facebook, so we call the login() 
-			  // function to prompt them to do so. Note that at this stage there is no indication
-			  // of whether they are logged into the app. If they aren't then they'll see the Login
-			  // dialog right after they log in to Facebook. 
-			  // The same caveats as above apply to the FB.login() call here.
-			  FB.login(function(){}, {scope: 'publish_actions'});
-			}
-		  });
-  
+
 
 
 		
 	
 	});
 	
-  window.fbAsyncInit = function() {
-	FB.init({
-	  appId      : '655381967842713',
-	  status     : true,
-	  xfbml      : false
-	});
-  };
 
-  (function(d, s, id){
-	 var js, fjs = d.getElementsByTagName(s)[0];
-	 if (d.getElementById(id)) {return;}
-	 js = d.createElement(s); js.id = id;
-	 js.src = "https://connect.facebook.net/en_US/all.js";
-	 fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));	
-	
 	
 });
 </script>
@@ -599,9 +559,9 @@ $(document).ready(function(){
 	<div class="row">
 		<div class="text-center shb-pannel">
 			<h3>Auto Correct Challange</h3>
-			<p class="shb-desc">Worst Auto Correct means that the winner is the one that didn't invoke his auto correct first,
-			 while Best Auto Correct means that the winner is the one which invoked the most accurate auto corrections. In both
-			 game types the objective is to write the sentences displaying without mistakes, including punctuation</p>
+			<p class="shb-desc">The object of the game is to survive as long as possible, random quotes will appear as you go on, each
+			letter you write correctly will grant you a bonus, and the same goes for auto correct, and sentences.<br>
+			However, if you write the wrong letter and your auto correct corrects wrongly, you will receive a penalty.</p>
 	
 		</div>
 	</div>
@@ -638,14 +598,14 @@ $(document).ready(function(){
       </div>
       <div class="modal-body">
         <p class="shb-faq-q">How to play?</p>
-		<p class="shb-faq-a">Hit the "New Game" button, after selecting the game type you wish, and then simply write the sentences that appear 
-		on your screen.</p>	  
+		<p class="shb-faq-a">Hit the "New Game" button, when the countdown is finished, simply write the sentences that appear 
+		on your screen. The current letter is marked with green to assist you.</p>	  
         <p class="shb-faq-q">Why is there no leaderboard?</p>
 		<p class="shb-faq-a">Well, we find it frustrating when you work really hard in an arcade game to then find out some guy did
 		a million times.</p>
 
-        <p class="shb-faq-q">Sometimes I get a sentence that's just unwriteable!</p>
-		<p class="shb-faq-a">Ya, sorry about that. Just hit the refresh button and fetch another sentence</p>
+        <p class="shb-faq-q">Sometimes no letter is marked as green!</p>
+		<p class="shb-faq-a">That happens when space is expected.</p>
 		
 		<p class="shb-faq-q">How can I contact you?</p>
 		<p class="shb-faq-a">Our telepathy service is temporarily down for maintenance, so in the mean time you can mail us at 
@@ -681,12 +641,13 @@ $(document).ready(function(){
 	  </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-success new_game" >New Game</button>
-		<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
-		<a id="share_score" ><i class="fa fa-facebook-square fa-2x"></i></a>
-		graph.facebook.com
-      </div>
+			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-success new_game" >New Game</button>
+			<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
+			<a id="fb_share_score" >
+				<i class="fa fa-facebook-square fa-2x" style="vertical-align: bottom;margin-bottom: -0.07em;font-size: 2.8em;"></i>
+			</a>
+	  </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
