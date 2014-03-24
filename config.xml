@@ -16,7 +16,6 @@
     <author href="http://shibby.co.il" email="support@shibby.co.il">
         Shibby 
     </author>
-	<!-- Plugins -->  
-	<gap:plugin name="org.apache.cordova.device" /> <!-- Device plugin -->
-	<gap:plugin name="org.apache.cordova.vibration" /> <!-- Vibration plugin -->
+	<!-- Plugins -->
+	<gap:plugin name="org.apache.cordova.vibration" />
 </widget>
