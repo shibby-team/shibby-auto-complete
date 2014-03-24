@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <widget xmlns   = "http://www.w3.org/ns/widgets"
+<widget xmlns   = "http://www.w3.org/ns/widgets"
         id          = "il.co.shibby.auto-complete"
         versionCode = "1" 
         version     = "0.1.0" >
@@ -14,7 +14,4 @@
     <author href="http://shibby.co.il" email="support@shibby.co.il">
         Shibby 
     </author>
-
-	<gap:plugin name="org.apache.cordova.vibration" />
-
 </widget>
