@@ -77,6 +77,8 @@ $(document).ready(function(){
 		$('#game_input').val('');
 		gameTime -= pastePenalty;
 		score -= pastePenalty;
+			if(typeof navigator.notification != "undefined")
+				navigator.notification.vibrate(500);		
 		notify("<span style='color:red;'>-"+miliToString(pastePenalty)+"</span>");
 		
 	});	
@@ -200,6 +202,8 @@ $(document).ready(function(){
 				else{
 					gameTime -= autoCorrectPenalty;
 					score -= autoCorrectBonus;
+					if(typeof navigator.notification != "undefined")
+						navigator.notification.vibrate(200);
 					notify("<span style='color:red;'>-"+miliToString(autoCorrectPenalty)+"</span>");		
 				}
 			}
@@ -215,11 +219,13 @@ $(document).ready(function(){
 		
 		clearInterval(gameTimer);
 		gameScore = calcScore();
-
+		
+		if(gameScore < 0)
+			gameScore = 0;
 		
 		if (highScore === null) {
 			highScore = gameScore;
-			("<span id='new_high_score'>New high score!</span>").insertAfter('.score');
+			$("<span id='new_high_score'>New high score!</span>").insertAfter('.score');
 		}
 		
 		
@@ -367,6 +373,8 @@ $(document).ready(function(){
 		else{
 			gameTime -= charPenalty;
 			score -= charPenalty;
+			if(typeof navigator.notification != "undefined")
+				navigator.notification.vibrate(200);
 			notify("<span style='color:red;'>-"+miliToString(charPenalty)+"</span>");
 	
 		
@@ -513,6 +521,69 @@ $(document).ready(function(){
 	});
 	
 	
+	function shareScore(){
+	
+		FB.api(
+		"/me",
+		function (response) {
+		  if (response && !response.error) {
+		console.log(response);
+		  }
+		}
+		);
+	
+	}
+	
+	$('#share_score').click(function(){
+		
+			FB.Event.subscribe('auth.authResponseChange', function(response) {
+			// Here we specify what we do with the response anytime this event occurs. 
+			if (response.status === 'connected') {
+			  // The response object is returned with a status field that lets the app know the current
+			  // login status of the person. In this case, we're handling the situation where they 
+			  // have logged in to the app.
+			  shareScore();
+			} else if (response.status === 'not_authorized') {
+			  // In this case, the person is logged into Facebook, but not into the app, so we call
+			  // FB.login() to prompt them to do so. 
+			  // In real-life usage, you wouldn't want to immediately prompt someone to login 
+			  // like this, for two reasons:
+			  // (1) JavaScript created popup windows are blocked by most browsers unless they 
+			  // result from direct interaction from people using the app (such as a mouse click)
+			  // (2) it is a bad experience to be continually prompted to login upon page load.
+			  FB.login(function(){}, {scope: 'publish_actions'});
+			} else {
+			  // In this case, the person is not logged into Facebook, so we call the login() 
+			  // function to prompt them to do so. Note that at this stage there is no indication
+			  // of whether they are logged into the app. If they aren't then they'll see the Login
+			  // dialog right after they log in to Facebook. 
+			  // The same caveats as above apply to the FB.login() call here.
+			  FB.login(function(){}, {scope: 'publish_actions'});
+			}
+		  });
+  
+
+
+		
+	
+	});
+	
+  window.fbAsyncInit = function() {
+	FB.init({
+	  appId      : '655381967842713',
+	  status     : true,
+	  xfbml      : false
+	});
+  };
+
+  (function(d, s, id){
+	 var js, fjs = d.getElementsByTagName(s)[0];
+	 if (d.getElementById(id)) {return;}
+	 js = d.createElement(s); js.id = id;
+	 js.src = "https://connect.facebook.net/en_US/all.js";
+	 fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));	
+	
 	
 });
 </script>
@@ -612,6 +683,8 @@ $(document).ready(function(){
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 		<button type="button" class="btn btn-success new_game" >New Game</button>
 		<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
+		<a id="share_score" ><i class="fa fa-facebook-square fa-2x"></i></a>
+		graph.facebook.com
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -628,6 +701,6 @@ $(document).ready(function(){
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
+<div id="fb-root"></div>
 </body>
 </html>
