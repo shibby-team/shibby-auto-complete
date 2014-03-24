@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <widget	xmlns:gap 	= "http://phonegap.com/ns/3.1.0"
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+		xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "il.co.shibby.auto-complete"
         versionCode = "1" 
         version     = "0.1.2" >
