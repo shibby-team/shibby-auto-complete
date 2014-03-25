@@ -3,6 +3,8 @@
 <head>
 <script src="phonegap.js"></script>
 <script src="vibration.js"></script>
+<script src="SocialSharing.js"></script>
+<script src="childbrowser.js"></script>
 	
 <script src="js/jquery.min.js"></script>
 <script src="js/peer.js"></script>
@@ -416,7 +418,13 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',true);
 		$('#kareoke').empty();
 		resetTime(); 
-		//$('#shb-start-countdown').show();
+		if(typeof window.plugins.ChildBrowser != "undefined")	
+			window.plugins.ChildBrowser.showWebPage('frame.html',
+                                        { 
+											showLocationBar		:	false,
+											showAddress			:	false,
+											showNavigationBar	:	false
+											});		//$('#shb-start-countdown').show();
 		
 	}
 	
