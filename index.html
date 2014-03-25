@@ -418,8 +418,9 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',true);
 		$('#kareoke').empty();
 		resetTime(); 
-		if(typeof window.plugins.ChildBrowser != "undefined")	
-			window.plugins.ChildBrowser.showWebPage('frame.html',
+		if(typeof window.plugins != "undefined")	
+			if(typeof window.plugins.ChildBrowser != "undefined")	
+				window.plugins.ChildBrowser.showWebPage('frame.html',
                                         { 
 											showLocationBar		:	false,
 											showAddress			:	false,
@@ -546,8 +547,18 @@ $(document).ready(function(){
 	}
 	
 	$('#fb_share_score').click(function(){
-		
-
+		if(typeof window.plugins != "undefined")	
+			if(typeof window.plugins.socialsharing != "undefined")
+				window.plugins.socialsharing.shareViaFacebook(
+																'I Scored X on Auto-currect!!', // Message
+																null,	//Subject
+																null,	//Image
+																null,	//Link
+																console.log('share ok'),
+																function(errormsg){
+																	alert(errormsg)
+																}
+															);
 
 
 		
