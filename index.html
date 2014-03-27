@@ -418,7 +418,7 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',true);
 		$('#kareoke').empty();
 		resetTime(); 
-		if(typeof window.plugins != "undefined")	
+		if(typeof window.plugins != "undefined"){	
 			if(typeof window.plugins.ChildBrowser != "undefined")	
 				window.plugins.ChildBrowser.showWebPage('frame.html',
                                         { 
@@ -426,6 +426,14 @@ $(document).ready(function(){
 											showAddress			:	false,
 											showNavigationBar	:	false
 											});		//$('#shb-start-countdown').show();
+		}
+		else{
+			
+			//@Eric: my tries...
+			$('#ad_content').load("frame.html");
+			$('#main_ad').modal("show");
+		
+		}
 		
 	}
 	
@@ -680,6 +688,13 @@ $(document).ready(function(){
       <i class="fa fa-pause fa-5x"></i>
 	  <p style="text-align:center;">Paused</p>
 	  <p style="text-align:center;">Click anywhere to unpause</p>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" role="dialog" id="main_ad">
+  <div class="modal-dialog">
+    <div class="modal-content" id="ad_content">
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

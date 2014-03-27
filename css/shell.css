@@ -168,6 +168,14 @@ height:100%;
 text-align: center;
 
 }
+.shb-custom-modal{
+background:none;
+box-shadow:none;
+-webkit-box-shadow:none;
+-moz-box-shadow:none;
+border:none;
+
+}
 #fb_share_score{
 color:#4c66a4;
 }
