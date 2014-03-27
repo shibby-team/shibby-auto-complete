@@ -29,6 +29,7 @@ $(document).ready(function(){
 	var lastWord  			= "", 			// Used for auto correct detection
 		startTimer			= 1, 			// Game start countdown
 		score				= 0,			// Holds the final score	
+		newGameCounter		= 0,
 		highScore			= localStorage.getItem("shb_ac_hs"),
 		gameInProgress  	= false,
 		completedQuotes		= new Array(), 	// Holds all the completed quotes to show @ gameover screen
@@ -287,7 +288,10 @@ $(document).ready(function(){
 	
 	var newGameEvent = function(){
 	
+		newGameCounter++;
 		$('#game_end').modal("hide");
+		$('#main_ad').modal("show");
+		return;
 		if(gameInProgress)
 			endGame();
 			
@@ -314,7 +318,7 @@ $(document).ready(function(){
 		}, 1000);		
 	
 	
-	}
+	};
 	
 	$('.new_game').click(newGameEvent);
 
@@ -427,13 +431,7 @@ $(document).ready(function(){
 											showNavigationBar	:	false
 											});		//$('#shb-start-countdown').show();
 		}
-		else{
-			
-			//@Eric: my tries...
-			$('#ad_content').load("frame.html");
-			$('#main_ad').modal("show");
-		
-		}
+
 		
 	}
 	
@@ -692,13 +690,26 @@ $(document).ready(function(){
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" role="dialog" id="main_ad">
+<div class="modal fade" role="dialog" id="main_ad" style="height:90%;">
   <div class="modal-dialog">
     <div class="modal-content" id="ad_content">
+	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:fixed;top:2px;right:2px;z-index:99999999;">&times;</button>
+	<iframe style="width:100%;height:100%;"><!DOCTYPE html><!--HTML5 doctype-->
+		<html><head>
+		<head>
+			<title></title>
+			<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+			 <script type="text/javascript" src="http://ad.leadboltads.net/show_app_ad.js?section_id=267764800"></script>
+		</head>
+			<body>
+		
+		</body>
+		</html>
+	</iframe>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div id="fb-root"></div>
+
 </body>
 </html>
