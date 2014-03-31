@@ -50,7 +50,7 @@ $(document).ready(function(){
 		kareokeFrom,						// Kareoke starting index
 		kareokeTo,							// Kareoke ending index
 		currentQuote;						// Current quote displaed
-		
+		adCounter			= 0;			// Keep track of ad display
 		
 		
 		
@@ -290,8 +290,6 @@ $(document).ready(function(){
 	
 		newGameCounter++;
 		$('#game_end').modal("hide");
-		//$('#main_ad').modal("show");
-		//return;
 		if(gameInProgress)
 			endGame();
 			
@@ -422,16 +420,21 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',true);
 		$('#kareoke').empty();
 		resetTime(); 
-		if(typeof window.plugins != "undefined"){	
-			if(typeof window.plugins.ChildBrowser != "undefined")	
-				window.plugins.ChildBrowser.showWebPage('http://ad.leadboltads.net/show_app_wall?section_id=958540713',
-                                        { 
-											showLocationBar		:	false,
-											showAddress			:	false,
-											showNavigationBar	:	false
-											});		//$('#shb-start-countdown').show();
+		if(adCounter == 3 || calcScore() >= 900){
+			console.log("Show Ad");
+			if(typeof window.plugins != "undefined"){	
+				if(typeof window.plugins.ChildBrowser != "undefined")	
+					window.plugins.ChildBrowser.showWebPage('http://ad.leadboltads.net/show_app_wall?section_id=958540713',
+											{ 
+												showLocationBar		:	false,
+												showAddress			:	false,
+												showNavigationBar	:	false
+												});		//$('#shb-start-countdown').show();
+			}
+			adCounter = 0;
+		} else {
+			adCounter++;
 		}
-
 		
 	}
 	
@@ -686,15 +689,6 @@ $(document).ready(function(){
       <i class="fa fa-pause fa-5x"></i>
 	  <p style="text-align:center;">Paused</p>
 	  <p style="text-align:center;">Click anywhere to unpause</p>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<div class="modal fade" role="dialog" id="main_ad" style="height:90%;">
-  <div class="modal-dialog">
-    <div class="modal-content" id="ad_content">
-	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:fixed;top:2px;right:2px;z-index:99999999;">&times;</button>
-	
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

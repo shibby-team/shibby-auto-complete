@@ -16,6 +16,15 @@
     <author href="http://shibby.co.il" email="support@shibby.co.il">
         Shibby 
     </author>
+	<!-- Icons -->
+	<icon src="icon.png" />
+		<!-- Adnroid -->
+		<icon src="imgs/android/icon/ldpi.png" gap:platform="android" gap:density="ldpi" />
+		<icon src="imgs/android/icon/mdpi.png" gap:platform="android" gap:density="mdpi" />
+		<icon src="imgs/android/icon/hdpi.png" gap:platform="android" gap:density="hdpi" />
+		<icon src="imgs/android/icon/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+		<icon src="imgs/android/icon/xxhdpi.png" gap:platform="android" gap:density="xxhdpi" />
+	
 	<!-- Builds -->
 	<gap:platform name="android" />
 	<!-- Plugins -->
