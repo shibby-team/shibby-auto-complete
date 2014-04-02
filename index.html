@@ -443,7 +443,7 @@ $(document).ready(function(){
 		$('#game_input').prop('readonly',true);
 		$('#kareoke').empty();
 		resetTime(); 
-		if(adCounter == 3 || calcScore() >= 900){
+		if(adCounter >= 3 || calcScore() >= 900){
 			// console.log("Show Ad");
 			if(typeof window.plugins != "undefined"){	
 				if(typeof window.plugins.ChildBrowser != "undefined" && network == true)	
@@ -453,8 +453,8 @@ $(document).ready(function(){
 												showAddress			:	false,
 												showNavigationBar	:	false
 												});		//$('#shb-start-countdown').show();
+				adCounter = 0;
 			}
-			adCounter = 0;
 		} else {
 			adCounter++;
 		}
