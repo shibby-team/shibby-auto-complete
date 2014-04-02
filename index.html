@@ -29,7 +29,7 @@ window.onerror = function(error) {
 $(document).ready(function(){
 
 	var lastWord  			= "", 			// Used for auto correct detection
-		startTimer			= 1, 			// Game start countdown
+		startTimer			= 3, 			// Game start countdown
 		score				= 0,			// Holds the final score	
 		newGameCounter		= 0,
 		highScore			= localStorage.getItem("shb_ac_hs"),
@@ -66,12 +66,12 @@ $(document).ready(function(){
 	}
 	
 	// INIT network status
-	if(navigator.connection != "undefined"){
-		var networkState = navigator.connection.type;
-		if(networkState != "Connection.NONE"){
-			network = true;
+		if(navigator.connection != "undefined"){
+			var networkState = navigator.connection.type;
+			if(networkState != "Connection.NONE"){
+				network = true;
+			}
 		}
-	}
 	document.addEventListener("offline", onOffline, false);
 
 	function onOffline() {
@@ -310,6 +310,7 @@ $(document).ready(function(){
 	var newGameEvent = function(){
 	
 		newGameCounter++;
+		$('.new_game').addClass("disabled");
 		$('#game_end').modal("hide");
 		if(gameInProgress)
 			endGame();
@@ -436,6 +437,7 @@ $(document).ready(function(){
 	function endGame(){
 	
 		gameInProgress = false;
+		$('.new_game').removeClass("disabled");
 		$('#game_container').css('visibility', 'hidden');
 		$('#string_to_match').css('visibility','hidden');	
 		$('#shb-start-countdown').empty();
@@ -579,10 +581,11 @@ $(document).ready(function(){
 	}
 	
 	$('#fb_share_score').click(function(){
-		if(typeof window.plugins != "undefined")	
-			if(typeof window.plugins.socialsharing != "undefined")
+		console.log('share to facebook');
+		if(typeof window.plugins != "undefined"){	
+			if(typeof window.plugins.socialsharing != "undefined"){
 				window.plugins.socialsharing.shareViaFacebook(
-																'I Scored X on Auto-currect!!', // Message
+																'I Scored '+calcScore()+' on Auto-currect!!', // Message
 																null,	//Subject
 																null,	//Image
 																null,	//Link
@@ -591,14 +594,13 @@ $(document).ready(function(){
 																	alert(errormsg)
 																}
 															);
-
-
-		
-	
+			} else {
+				console.log("window.plugins.socialsharing is undefined");
+			}
+		} else {
+			console.log("window.plugins is undefined");
+		}
 	});
-	
-
-	
 });
 </script>
 </head>
