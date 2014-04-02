@@ -222,9 +222,11 @@ $(document).ready(function(){
 
 	
 	function gameOver(){
+	
 		
 		clearInterval(gameTimer);
-		gameScore = calcScore();
+		gameScore 		= calcScore();
+		gameInProgress 	= false;
 		
 		if(gameScore < 0)
 			gameScore = 0;
@@ -366,31 +368,33 @@ $(document).ready(function(){
 	
 	$('#game_input').keypress(function(e){
 	
-		var charCode = (typeof e.which == "number") ? e.which : e.keyCode
+		if(gameInProgress){
+			var charCode = (typeof e.which == "number") ? e.which : e.keyCode
 
-		//console.log("Exp: "+$('#kareoke span').html().toUpperCase()+" Got: "+String.fromCharCode(charCode).toUpperCase());
+			//console.log("Exp: "+$('#kareoke span').html().toUpperCase()+" Got: "+String.fromCharCode(charCode).toUpperCase());
+			
+			if( $('#kareoke span').html().toUpperCase() == String.fromCharCode(charCode).toUpperCase()){
+			gameTime += charBonus;
+			score += charBonus;
+			if(score % 10000 == 0 && charBonus > 100)
+				charBonus -= 100;
+			notify("+"+miliToString(charBonus));
+			}
+			else{
+				gameTime -= charPenalty;
+				score -= charPenalty;
+				if(typeof navigator.notification != "undefined")
+					navigator.notification.vibrate(200);
+				notify("<span style='color:red;'>-"+miliToString(charPenalty)+"</span>");
 		
-		if( $('#kareoke span').html().toUpperCase() == String.fromCharCode(charCode).toUpperCase()){
-		gameTime += charBonus;
-		score += charBonus;
-		if(score % 10000 == 0 && charBonus > 100)
-			charBonus -= 100;
-		notify("+"+miliToString(charBonus));
+			
+			}
+			
+		
+					
+			updateKareoke(e);
+			console.log(score);
 		}
-		else{
-			gameTime -= charPenalty;
-			score -= charPenalty;
-			if(typeof navigator.notification != "undefined")
-				navigator.notification.vibrate(200);
-			notify("<span style='color:red;'>-"+miliToString(charPenalty)+"</span>");
-	
-		
-		}
-		
-	
-				
-		updateKareoke(e);
-		console.log(score);
 	});
 
 
