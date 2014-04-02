@@ -2,6 +2,7 @@
 <html>
 <head>
 <script src="phonegap.js"></script>
+<script src="network-information.js"></script>
 <script src="vibration.js"></script>
 <script src="SocialSharing.js"></script>
 <script src="childbrowser.js"></script>
@@ -21,7 +22,8 @@
 <script type="text/javascript">
 
 window.onerror = function(error) {
-    alert(error);
+    // alert(error);
+	console.log("Error: "+error);
 };
 
 $(document).ready(function(){
@@ -51,7 +53,7 @@ $(document).ready(function(){
 		kareokeTo,							// Kareoke ending index
 		currentQuote;						// Current quote displaed
 		adCounter			= 0;			// Keep track of ad display
-		
+		network				= false;		// Indicates if the device has network or not.
 		
 		
 	
@@ -63,9 +65,26 @@ $(document).ready(function(){
 		$('#high_score').html(highScore);
 	}
 	
-	
+	// INIT network status
+	if(navigator.connection != "undefined"){
+		var networkState = navigator.connection.type;
+		if(networkState != "Connection.NONE"){
+			network = true;
+		}
+	}
+	document.addEventListener("offline", onOffline, false);
 
-	
+	function onOffline() {
+		// Handle the offline event
+		network = false;
+	}
+
+	document.addEventListener("online", onOnline, false);
+
+	function onOnline() {
+		// Handle the online event
+		network = true;
+	}
 	//@TODO: this code should be used for "Settings", if they'll exist, since this switches between buttons.	
 	// $('.game_type_btns').click(function(){
 	
@@ -425,9 +444,9 @@ $(document).ready(function(){
 		$('#kareoke').empty();
 		resetTime(); 
 		if(adCounter == 3 || calcScore() >= 900){
-			console.log("Show Ad");
+			// console.log("Show Ad");
 			if(typeof window.plugins != "undefined"){	
-				if(typeof window.plugins.ChildBrowser != "undefined")	
+				if(typeof window.plugins.ChildBrowser != "undefined" && network == true)	
 					window.plugins.ChildBrowser.showWebPage('http://ad.leadboltads.net/show_app_wall?section_id=958540713',
 											{ 
 												showLocationBar		:	false,

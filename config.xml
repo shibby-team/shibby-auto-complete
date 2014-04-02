@@ -29,6 +29,7 @@
 	<gap:platform name="android" />
 	<!-- Plugins -->
 	<gap:plugin name="org.apache.cordova.vibration" />
+	<gap:plugin name="org.apache.cordova.network-information" />	
 	<gap:plugin name="nl.x-services.plugins.socialsharing" />
 	<gap:plugin name="com.phonegap.plugins.childbrowser" />
 </widget>
