@@ -585,16 +585,18 @@ $(document).ready(function(){
 		console.log('share to facebook');
 		if(typeof window.plugins != "undefined"){	
 			if(typeof window.plugins.socialsharing != "undefined"){
-				window.plugins.socialsharing.shareViaFacebook(
-																'I Scored '+calcScore()+' on Auto-currect!!', // Message
-																null,	//Subject
-																null,	//Image
-																null,	//Link
-																console.log('share ok'),
-																function(errormsg){
-																	alert(errormsg)
-																}
-															);
+				//window.plugins.socialsharing.shareViaFacebook(
+															//	'I Scored '+calcScore()+' on Auto-currect!!', // Message
+															//	null,	//Subject
+															//	null,	//Image
+															//	null,	//Link
+															//	console.log('share ok'),
+															//	function(errormsg){
+															//		alert(errormsg)
+															//	}
+															//);
+				window.plugins.socialsharing.share('I Scored '+calcScore()+' on Auto-currect!!', null, null, 'http://shibby.co.il');
+
 			} else {
 				console.log("window.plugins.socialsharing is undefined");
 			}
