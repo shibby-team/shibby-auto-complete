@@ -66,13 +66,14 @@ $(document).ready(function(){
 	}
 	
 	// INIT network status
-		if(navigator.connection != "undefined")
-			if(navigator.connection.type != "undefined"){
-				var networkState = navigator.connection.type;
-				if(networkState != "Connection.NONE"){
-					network = true;
+		if(navigator != "undefined")
+			if(navigator.connection != undefined)
+				if(navigator.connection.type != "undefined"){
+					var networkState = navigator.connection.type;
+					if(networkState != "Connection.NONE"){
+						network = true;
+					}
 				}
-			}
 	document.addEventListener("offline", onOffline, false);
 
 	function onOffline() {
@@ -296,17 +297,6 @@ $(document).ready(function(){
 
 	
 	}	
-	
-	
-	// function mobile_debug(object){
-	// //alert(JSON.stringify(object, null, 4));
-		// var output = '';
-		// for (var property in object) {
-		  // output += property + ': ' + object[property]+'; ';
-		// }
-		// alert(output);
-	
-	// }
 	
 	var newGameEvent = function(){
 	
@@ -703,7 +693,7 @@ $(document).ready(function(){
 			<button type="button" class="btn btn-success new_game" >New Game</button>
 			<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
 			<button type="button" class="btn" id="fb_share_score" >
-				<i class="fa fa-facebook-square fa-2x" style="vertical-align: bottom;margin-bottom: -0.07em;font-size: 2.8em;"></i>
+				<i class="fa fa-share fa-2x"></i>
 			</button>
 	  </div>
     </div><!-- /.modal-content -->
