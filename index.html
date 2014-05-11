@@ -281,7 +281,7 @@ $(document).ready(function(){
 	}
 	
 	function calcScore(){
-	
+		if(score <= 0) return 0;
 		return Math.round(score / 1000);
 	
 	}
@@ -297,6 +297,17 @@ $(document).ready(function(){
 
 	
 	}	
+	
+	
+	// function mobile_debug(object){
+	// //alert(JSON.stringify(object, null, 4));
+		// var output = '';
+		// for (var property in object) {
+		  // output += property + ': ' + object[property]+'; ';
+		// }
+		// alert(output);
+	
+	// }
 	
 	var newGameEvent = function(){
 	
@@ -692,8 +703,8 @@ $(document).ready(function(){
 			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 			<button type="button" class="btn btn-success new_game" >New Game</button>
 			<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
-			<button type="button" class="btn" id="fb_share_score" >
-				<i class="fa fa-share fa-2x"></i>
+			<button type="button" class="btn btn-primary" id="fb_share_score" >
+				<img src="imgs/icons/Very-Basic-share-icon.png" style="width: 41%;" />
 			</button>
 	  </div>
     </div><!-- /.modal-content -->
