@@ -427,7 +427,7 @@ $(document).ready(function(){
 		var quote 	= getRandomString();
 		//$('#string_to_match blockquote').html(quote.quote);
 		//$('#string_to_match .shb-quote-author').html(quote.quote_by);
-		$('#game_input').prop('readonly',false);		
+		$('#game_input').prop('readonly',false).focus();
 		initKareoke(quote);
 		gameTimer = setInterval(setTime, 100);
 		$('#quotes-list-container').hide();
@@ -700,12 +700,24 @@ $(document).ready(function(){
 	  </div>
       </div>
       <div class="modal-footer" style="text-align:center;">
-			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-success new_game" >New Game</button>
-			<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
-			<button type="button" class="btn btn-primary" id="fb_share_score" >
-				<img src="imgs/icons/Very-Basic-share-icon.png" style="width: 41%;" />
-			</button>
+		<div class="row" style="margin-bottom:15px;">
+			<!-- <div class="col-md-6"> -->
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			<!-- </div> -->
+			<!-- <div class="col-md-6"> -->
+				<button type="button" class="btn btn-success new_game" >New Game</button>
+			<!-- </div> -->
+		</div>
+		<div class="row">
+			<!-- <div class="col-md-6"> -->
+				<button type="button" class="btn btn-primary" id="display_quotes">Show quotes</button>
+			<!-- </div> -->
+			<!-- <div class="col-md-6"> -->
+				<button type="button" class="btn btn-primary" id="fb_share_score" >
+					<img src="imgs/icons/Very-Basic-share-icon-wight.png" style="width: 41%;" />
+				</button>
+			<!-- </div> -->
+		</div>
 	  </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
