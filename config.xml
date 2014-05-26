@@ -3,11 +3,11 @@
 		xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "il.co.shibby.auto-complete"
         versionCode = "1" 
-        version     = "0.1.2" >
+        version     = "1.0.0" >
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Auto-Complete</name>
+    <name>Auto-Complete Challenge</name>
 
     <description>
         An auto-complete game for mobile by shibby-team.
