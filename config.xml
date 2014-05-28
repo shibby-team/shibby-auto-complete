@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Auto-Complete Challenge</name>
+    <name>Auto Correct Challenge</name>
 
     <description>
-        An auto-complete game for mobile by shibby-team.
+        An Auto Correct game for mobile by shibby-team.
     </description>
 
     <author href="http://shibby.co.il" email="support@shibby.co.il">
