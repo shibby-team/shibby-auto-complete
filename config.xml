@@ -16,6 +16,13 @@
     <author href="http://shibby.co.il" email="support@shibby.co.il">
         Shibby 
     </author>
+	<!-- Disable default permissions -->
+	<preference name="permissions" value="none"/>
+	
+	<!-- Needed permitions -->
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/file"/>
+
 	<!-- Icons -->
 	<icon src="icon.png" />
 		<!-- Adnroid -->
